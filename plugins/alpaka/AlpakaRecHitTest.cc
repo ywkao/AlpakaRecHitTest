@@ -27,6 +27,9 @@ namespace ALPAKA_ACCELERATOR_NAMESPACE {
 
       // put the asynchronous product into the event without waiting
       algo_.fill(event.queue(), deviceProduct);
+
+      // put the asynchronous product into the event without waiting
+      event.emplace(deviceToken_, std::move(deviceProduct));
     }
 
     static void fillDescriptions(edm::ConfigurationDescriptions& descriptions) {

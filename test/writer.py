@@ -28,7 +28,6 @@ process.output = cms.OutputModule('PoolOutputModule',
 )
 
 process.serial_path = cms.Path(process.testProducerSerial + process.testAnalyzerSerial)
-#process.serial_path = cms.Path(process.testProducerSerial)
 
 process.output_path = cms.EndPath(process.output)
 
