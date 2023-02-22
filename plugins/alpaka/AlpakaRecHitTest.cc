@@ -18,14 +18,11 @@ namespace ALPAKA_ACCELERATOR_NAMESPACE {
 
   class AlpakaRecHitTest : public global::EDProducer<> {
   public:
-    AlpakaRecHitTest(edm::ParameterSet const& config)
-        : deviceToken_{produces()}, size_{config.getParameter<int32_t>("size")} {}
+    AlpakaRecHitTest(edm::ParameterSet const& config) : deviceToken_{produces()}, size_{config.getParameter<int32_t>("size")} {}
 
     void produce(edm::StreamID sid, device::Event& event, device::EventSetup const& setup) const override {
       // run the algorithm, potentially asynchronously
       portabletest::TestDeviceCollection deviceProduct{size_, event.queue()};
-
-      // put the asynchronous product into the event without waiting
       algo_.fill(event.queue(), deviceProduct);
 
       // put the asynchronous product into the event without waiting
