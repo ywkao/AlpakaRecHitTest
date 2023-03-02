@@ -15,7 +15,7 @@ process.testProducer = cms.EDProducer('AlpakaRecHitTest@alpaka',
     size = cms.int32(42)
 )
 
-process.testAnalyzer = cms.EDAnalyzer('TestAlpakaAnalyzer',
+process.testAnalyzer = cms.EDAnalyzer('TestAlpakaRecHitAnalyzer',
     source = cms.InputTag('testProducer')
 )
 
@@ -26,7 +26,7 @@ process.testProducerSerial = cms.EDProducer('alpaka_serial_sync::AlpakaRecHitTes
     size = cms.int32(42)
 )
 
-process.testAnalyzerSerial = cms.EDAnalyzer('TestAlpakaAnalyzer',
+process.testAnalyzerSerial = cms.EDAnalyzer('TestAlpakaRecHitAnalyzer',
     source = cms.InputTag('testProducerSerial')
 )
 
@@ -37,12 +37,12 @@ process.output = cms.OutputModule('PoolOutputModule',
     fileName = cms.untracked.string('output_test.root'),
     outputCommands = cms.untracked.vstring(
         'drop *',
-        'keep *_testProducer_*_*',
+        #'keep *_testProducer_*_*',
         'keep *_testProducerSerial_*_*',
     )
 )
 
-process.gpu_path = cms.Path(process.testProducer + process.testAnalyzer)
+#process.gpu_path = cms.Path(process.testProducer + process.testAnalyzer)
 process.serial_path = cms.Path(process.testProducerSerial + process.testAnalyzerSerial)
 process.output_path = cms.EndPath(process.output)
 
