@@ -93,7 +93,7 @@ public:
 
     printf("[INFO] Hello World from analyze()!\n");
 
-    //{
+    {
       edm::LogInfo msg("TestAlpakaRecHitAnalyzer");
       msg << source_.encode() << ".size() = " << view.metadata().size() << '\n';
       msg << "  data @ " << product.buffer().data() << ",\n"
@@ -120,7 +120,7 @@ public:
           << "  [m - r] = 0x"
           << reinterpret_cast<intptr_t>(view.metadata().addressOf_m()) -
                  reinterpret_cast<intptr_t>(view.metadata().addressOf_r());
-    //}
+    }
 
     checkViewAddresses(view);
     checkViewAddresses(mview);

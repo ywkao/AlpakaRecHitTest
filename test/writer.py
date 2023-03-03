@@ -7,6 +7,13 @@ process.source = cms.Source('EmptySource')
 process.load('Configuration.StandardSequences.Accelerators_cff')
 process.load('HeterogeneousCore.AlpakaCore.ProcessAcceleratorAlpaka_cfi')
 
+#--------------------------------------------------
+# Message logger
+#--------------------------------------------------
+process.load("FWCore.MessageLogger.MessageLogger_cfi")
+process.MessageLogger.cerr.FwkReport.reportEvery = cms.untracked.int32(1)
+process.MessageLogger.cerr.INFO.limit = cms.untracked.int32(10000000)
+
 #-------------------------------------------------------------------------------------
 # running on the best backend, i.e.
 # run the producer on a gpu and copy the product to the cpu, or run directly on the cpu
