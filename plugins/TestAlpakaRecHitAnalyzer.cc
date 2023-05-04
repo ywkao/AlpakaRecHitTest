@@ -1,6 +1,7 @@
 #include <cassert>
 
-#include "DataFormats/PortableTestObjects/interface/TestHostCollection.h"
+//#include "DataFormats/PortableTestObjects/interface/TestHostCollection.h"
+#include "DataFormats/PortableTestObjects/interface/TestHostRecHitCollection.h"
 #include "FWCore/Framework/interface/Event.h"
 #include "FWCore/Framework/interface/EventSetup.h"
 #include "FWCore/Framework/interface/Frameworkfwd.h"
@@ -81,7 +82,7 @@ public:
         expectSize_(config.getParameter<int>("expectSize")) {}
 
   void analyze(edm::Event const& event, edm::EventSetup const&) override {
-    portabletest::TestHostCollection const& product = event.get(token_);
+    portabletest::TestHostRecHitCollection const& product = event.get(token_);
     auto const& view = product.const_view();
     auto& mview = product.view();
     auto const& cmview = product.view();
@@ -148,7 +149,7 @@ public:
 
 private:
   const edm::InputTag source_;
-  const edm::EDGetTokenT<portabletest::TestHostCollection> token_;
+  const edm::EDGetTokenT<portabletest::TestHostRecHitCollection> token_;
   const int expectSize_;
 };
 

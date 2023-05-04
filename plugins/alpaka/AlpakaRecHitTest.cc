@@ -1,5 +1,6 @@
 #include "DataFormats/Portable/interface/Product.h"
-#include "DataFormats/PortableTestObjects/interface/alpaka/TestDeviceCollection.h"
+//#include "DataFormats/PortableTestObjects/interface/alpaka/TestDeviceCollection.h"
+#include "DataFormats/PortableTestObjects/interface/alpaka/TestDeviceRecHitCollection.h"
 #include "FWCore/Framework/interface/Frameworkfwd.h"
 #include "FWCore/ParameterSet/interface/ConfigurationDescriptions.h"
 #include "FWCore/ParameterSet/interface/ParameterSet.h"
@@ -22,7 +23,7 @@ namespace ALPAKA_ACCELERATOR_NAMESPACE {
 
     void produce(edm::StreamID sid, device::Event& event, device::EventSetup const& setup) const override {
       // run the algorithm, potentially asynchronously
-      portabletest::TestDeviceCollection deviceProduct{size_, event.queue()};
+      portabletest::TestDeviceRecHitCollection deviceProduct{size_, event.queue()};
       algo_.fill(event.queue(), deviceProduct);
 
       // put the asynchronous product into the event without waiting
@@ -36,7 +37,7 @@ namespace ALPAKA_ACCELERATOR_NAMESPACE {
     }
   
   private:
-    const device::EDPutToken<portabletest::TestDeviceCollection> deviceToken_;
+    const device::EDPutToken<portabletest::TestDeviceRecHitCollection> deviceToken_;
     const int32_t size_;
 
     // implementation of the algorithm

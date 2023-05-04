@@ -1,6 +1,7 @@
 #include <alpaka/alpaka.hpp>
 
-#include "DataFormats/PortableTestObjects/interface/alpaka/TestDeviceCollection.h"
+//#include "DataFormats/PortableTestObjects/interface/alpaka/TestDeviceCollection.h"
+#include "DataFormats/PortableTestObjects/interface/alpaka/TestDeviceRecHitCollection.h"
 #include "HeterogeneousCore/AlpakaInterface/interface/config.h"
 #include "HeterogeneousCore/AlpakaInterface/interface/traits.h"
 #include "HeterogeneousCore/AlpakaInterface/interface/workdivision.h"
@@ -15,7 +16,7 @@ namespace ALPAKA_ACCELERATOR_NAMESPACE {
   public:
     template <typename TAcc, typename = std::enable_if_t<alpaka::isAccelerator<TAcc>>>
     ALPAKA_FN_ACC void operator()(TAcc const& acc,
-                                  portabletest::TestDeviceCollection::View view,
+                                  portabletest::TestDeviceRecHitCollection::View view,
                                   int32_t size, double xvalue) const {
       // global index of the thread within the grid
       const int32_t thread = alpaka::getIdx<alpaka::Grid,alpaka::Threads>(acc)[0u];
@@ -33,7 +34,7 @@ namespace ALPAKA_ACCELERATOR_NAMESPACE {
     }
   };
 
-  void TestAlgo::fill(Queue& queue, portabletest::TestDeviceCollection& collection, double xvalue) const {
+  void TestAlgo::fill(Queue& queue, portabletest::TestDeviceRecHitCollection& collection, double xvalue) const {
     // use 64 items per group (this value is arbitrary, but it's a reasonable starting point)
     uint32_t items = 64;
 
